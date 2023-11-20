@@ -1,0 +1,8 @@
+{
+    "dbHost": "",
+    "dbPort": 3306,
+    "dbPassword": "",
+    "dbName": "residential",
+    "jwtSecretKey": "",
+    "jwtMillisExpiration": 3600000
+}
