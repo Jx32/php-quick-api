@@ -1,5 +1,8 @@
 {
     "exception": {
         "create": "INSERT INTO log (id, severity, message, trace_id) VALUES (nextval(:seq_name), 'ERROR', :message, :trace_id)"
+    },
+    "resident": {
+        "create": "INSERT INTO resident (id, first_name, last_name, email, phone, fm_token, last_login, photo_url, status, pwd, blocked_until, retries) VALUES (nextval(?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
     }
 }

@@ -11,5 +11,20 @@ class ResidentialPdoClient {
             [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
         );
     }
+
+    public static function commit(PDO $db) {
+        if (!is_null($db) && $db->inTransaction()) {
+            $db->commit();
+        }
+
+    }
+    public static function rollback(PDO $db) {
+        if (!is_null($db) && $db->inTransaction()) {
+            $db->rollBack();
+        }
+    }
+    public static function finishConnection(PDO &$db) {
+        $db = null;
+    }
 }
 ?>

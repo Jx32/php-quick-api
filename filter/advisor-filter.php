@@ -4,6 +4,7 @@ use com\atomicdev\dao\ApiMapper;
 use com\atomicdev\dao\LogDAO;
 use com\atomicdev\database\ResidentialPdoClient;
 use com\atomicdev\exception\ApiException;
+use com\atomicdev\exception\BadRequestException;
 use com\atomicdev\request\BaseHttpResponse;
 use com\atomicdev\request\V1Request;
 use PDOException;
@@ -11,6 +12,7 @@ use PDOException;
 include_once("$root/request/v1-request.php");
 include_once("$root/request/base-http-response.php");
 include_once("$root/exception/api-exception.php");
+include_once("$root/exception/bad-request-exception.php");
 include_once("$root/dao/log-dao.php");
 include_once("$root/dao/api-mapper.php");
 include_once("$root/database/residential-pdo-client.php");
@@ -43,6 +45,14 @@ class AdvisorFilter implements Filter {
 
             $response->setResponse("Database error: " . $e->getMessage());
             $response->setResponseCode(500);
+        } catch (BadRequestException $e) {
+            $db = ResidentialPdoClient::getConnection($request->getEnvs());
+            $log = ApiMapper::mapErrorLog($e, $request);
+            $logDao = new LogDAO($db);
+            $logDao->createLog($log);
+
+            $response->setResponse($e->getMessage());
+            $response->setResponseCode($e->getCode());
         } finally {
             if ($db !== null) {
                 $db = null;
