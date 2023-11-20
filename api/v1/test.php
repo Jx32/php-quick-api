@@ -1,9 +1,12 @@
 <?php
 namespace com\atomicdev\api\v1;
-use com\atomicdev\request\RequestUtil;
+use com\atomicdev\controller\TestController;
+use com\atomicdev\request\RequestFacade;
 
-$request = RequestUtil::buildRequest();
+include_once("../../v1-bootstrap.php");
+include_once("$root/controller/test-controller.php");
+include_once("$root/request/request-facade.php");
 
-header("Content-Type: application/json");
-echo json_encode($request, true);
+$controller = new TestController();
+echo RequestFacade::doRequestWithController($controller, $root);
 ?>
