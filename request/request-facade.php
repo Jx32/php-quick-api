@@ -50,7 +50,9 @@ class RequestFacade {
     }
 
     private static function setPHPHeaders(BaseHttpResponse $response): void {
-        header("Content-Type: application/json");
+        foreach ($response->getHeaders() as $key => $value) {
+            header($key .': '. $value, true);
+        }
         http_response_code($response->getResponseCode());
     }
 
