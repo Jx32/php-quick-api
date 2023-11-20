@@ -1,6 +1,7 @@
 {
     "dbHost": "",
     "dbPort": 3306,
+    "dbUsername": "root",
     "dbPassword": "",
     "dbName": "residential",
     "username": "login_user",

@@ -21,5 +21,8 @@ class V1Request extends BaseHttpRequest {
     public function getEnv(string $key) {
         return $this->env[$key] ?? null;
     }
+    public function getEnvs() {
+        return $this->env;
+    }
 }
 ?>

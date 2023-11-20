@@ -3,6 +3,7 @@ namespace com\atomicdev\filter;
 use com\atomicdev\exception\ApiException;
 use com\atomicdev\request\BaseHttpResponse;
 use com\atomicdev\request\V1Request;
+use PDOException;
 include_once("$root/request/v1-request.php");
 include_once("$root/request/base-http-response.php");
 include_once("$root/exception/api-exception.php");
@@ -21,6 +22,9 @@ class AdvisorFilter implements Filter {
         } catch (ApiException $ae) {
             $response->setResponse($ae->getMessage());
             $response->setResponseCode($ae->getCode());
+        } catch (PDOException $e) {
+            $response->setResponse("Database error: " . $e->getMessage());
+            $response->setResponseCode(500);
         }
     }
 }
