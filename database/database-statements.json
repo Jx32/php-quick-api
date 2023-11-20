@@ -1,0 +1,5 @@
+{
+    "exception": {
+        "create": "INSERT INTO log (id, severity, message, trace_id) VALUES (nextval('seq_log'), 'ERROR', :message, :traceId)"
+    }
+}

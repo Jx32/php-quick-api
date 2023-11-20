@@ -1,9 +1,9 @@
 {
     "dbHost": "",
-    "dbPort": 3306,
-    "dbUsername": "root",
-    "dbPassword": "",
-    "dbName": "residential",
+    "dbPort": 5432,
+    "dbUsername": "postgres",
+    "dbPassword": "postgres",
+    "dbName": "housekeeping",
     "username": "login_user",
     "password": "tsqOMV1BYn9QCjxDeznwzxqb"
 }

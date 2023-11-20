@@ -4,18 +4,12 @@ use PDO;
 
 class ResidentialPdoClient {
     public static function getConnection(array $env = []) : PDO {
-        $options = [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"];
-
-        $pdoInstance = new PDO(
-            "mysql:host=".$env["dbHost"].";dbname=".$env["dbName"],
+        return new PDO(
+            "pgsql:host=".$env["dbHost"].";port=".$env["dbPort"].";dbname=".$env["dbName"],
             $env["dbUsername"],
             $env["dbPassword"],
-            $options
+            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
         );
-
-        $pdoInstance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        return $pdoInstance;
     }
 }
 ?>

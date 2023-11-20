@@ -9,7 +9,7 @@ include_once("$root/database/residential-pdo-client.php");
 
 class TestController extends Controller {
     public function getResponse(V1Request $request) : mixed {
-        $response = [];
+        $response = null;
         $db = null;
 
         try {

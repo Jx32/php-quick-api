@@ -15,6 +15,14 @@ class BaseHttpRequest {
         $this->body = $body;
         $this->headers = $headers;
         $this->queryParams = $queryParams;
+
+        $this->addTraceIdToHeaderIfAbsent();
+    }
+
+    private function addTraceIdToHeaderIfAbsent() {
+        if (!isset($this->headers["Trace-Id"]) || $this->headers["Trace-Id"] == null) {
+            $this->headers["Trace-Id"] = uniqid();
+        }
     }
 
     public function getUrl(): string {

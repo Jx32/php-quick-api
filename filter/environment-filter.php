@@ -29,6 +29,9 @@ class EnvironmentFilter implements Filter {
         }
 
         $request->addEnvs($envVars);
+
+        // Replicate trace-id to HTTP response
+        $response->setHeader("Trace-Id", $request->getHeaders()["Trace-Id"]);
         
         $filterChain->doChain($request, $response);
     }

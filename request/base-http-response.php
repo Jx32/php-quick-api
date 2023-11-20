@@ -4,13 +4,9 @@ namespace com\atomicdev\request;
 class BaseHttpResponse {
     private mixed $response;
     private int $responseCode = 200;
-    private string $traceId;
     private array $headers = [];
 
     public function __construct() {
-        $this->traceId = uniqid();
-
-        $this->setHeader("Trace-Id", $this->traceId);
         $this->setHeader("Content-Type", "application/json");
     }
 
@@ -33,13 +29,6 @@ class BaseHttpResponse {
     public function setResponseCode(int $responseCode): BaseHttpResponse {
         $this->responseCode = $responseCode;
         return $this;
-    }
-    public function setTraceId(string $traceId): BaseHttpResponse {
-        $this->traceId = $traceId;
-        return $this;
-    }
-    public function getTraceId(): string {
-        return $this->traceId;
     }
     public function getHeaders() : array {
         return $this->headers;
