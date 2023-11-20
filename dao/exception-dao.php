@@ -28,7 +28,8 @@ class ExceptionDAO extends BaseDAO {
             $this->commit();
         } catch (PDOException $e) {
             $this->rollback();
-            error_log("Error logging on log table: " . $e->getMessage() . " " . $e->getTraceAsString());
+            error_log("TraceId: ".$traceId." Error logging on log table: ".
+                    $e->getMessage()." ".$e->getTraceAsString());
         }
     }
 }
