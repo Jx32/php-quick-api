@@ -5,21 +5,10 @@ use PDO;
 use PDOStatement;
 
 include_once("$root/dao/base-dao.php");
-include_once("$root/model/resident.php");
 
-class ResidentDAO extends BaseDAO {
+class RoleDAO extends BaseDAO {
     private $seqName = "seq_resident";
     private $className = "\com\atomicdev\model\Resident";
-
-    public function createResident(Resident $entity) {
-        $stmt = $this->db->prepare($this->getDAOStatements()[CREATE]);
-        $this->addBindParam($stmt, "seq", $this->seqName, PDO::PARAM_STR);
-        $this->addCommonOrderedParams($stmt, $entity);
-
-        $stmt->execute();
-
-        return $stmt->fetchObject($this->className);
-    }
 
     public function updateResident(Resident $entity) {
         $stmt = $this->db->prepare($this->getDAOStatements()[UPDATE]);
