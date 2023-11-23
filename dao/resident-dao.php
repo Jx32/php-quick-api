@@ -12,23 +12,29 @@ class ResidentDAO extends BaseDAO {
     private $className = "\com\atomicdev\model\Resident";
 
     public function createResident(Resident $entity) {
+        $roles = $entity->roles;
         $stmt = $this->db->prepare($this->getDAOStatements()[CREATE]);
         $this->addBindParam($stmt, "seq", $this->seqName, PDO::PARAM_STR);
         $this->addCommonOrderedParams($stmt, $entity);
 
         $stmt->execute();
 
-        return $stmt->fetchObject($this->className);
+        $result = $stmt->fetchObject($this->className);
+        $result->roles = $roles;
+        return $result;
     }
 
     public function updateResident(Resident $entity) {
+        $roles = $entity->roles;
         $stmt = $this->db->prepare($this->getDAOStatements()[UPDATE]);
         $this->addBindParam($stmt, "id", $entity->id, PDO::PARAM_INT);
         $this->addCommonOrderedParams($stmt, $entity);
 
         $stmt->execute();
 
-        return $stmt->fetchObject($this->className);
+        $result = $stmt->fetchObject($this->className);
+        $result->roles = $roles;
+        return $result;
     }
 
     public function getResidentById(int $id) {

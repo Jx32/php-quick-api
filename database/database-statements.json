@@ -7,5 +7,10 @@
         "update": "UPDATE resident SET first_name=:first_name, last_name=:last_name, email=:email, phone=:phone, fm_token=:fm_token, last_login=:last_login, photo_url=:photo_url, status=:status, pwd = case when :pwd::varchar is null then pwd else :pwd end, blocked_until=:blocked_until, retries=:retries WHERE id=:id RETURNING *",
         "get": "SELECT * FROM resident WHERE id = :id",
         "delete": "DELETE FROM resident WHERE id = :id RETURNING *"
+    },
+    "role": {
+        "create": "INSERT INTO roles (id, type, resident_id) VALUES (nextval(:seq), :type, :resident_id) RETURNING type",
+        "get": "SELECT * FROM roles WHERE resident_id = :resident_id",
+        "delete": "DELETE FROM roles WHERE resident_id = :resident_id"
     }
 }

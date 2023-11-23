@@ -1,6 +1,7 @@
 <?php
 namespace com\atomicdev\dao;
 use com\atomicdev\model\Log;
+use com\atomicdev\model\Role;
 use com\atomicdev\request\V1Request;
 use Exception;
 
@@ -17,6 +18,35 @@ class ApiMapper {
         $log->message = $errorMessage;
         $log->severity = "ERROR";
         return $log;
+    }
+
+    public static function mapRoleTypeToEntity(array $roles, int $residentId) : array {
+        if (!isset($roles) || empty($roles)) {
+            return [];
+        }
+
+        $result = [];
+
+        foreach ($roles as $type) {
+            $entity = new Role();
+            $entity->type = $type;
+            $entity->resident_id = $residentId;
+
+            $result[] = $entity;
+        }
+        return $result;
+    }
+    public static function mapEntityRoleToType(array $entities) : array {
+        if (!isset($entities) || empty($entities)) {
+            return [];
+        }
+
+        $result = [];
+
+        foreach ($entities as $entity) {
+            $result[] = $entity->type;
+        }
+        return $result;
     }
 }
 ?>
