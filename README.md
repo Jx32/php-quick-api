@@ -7,6 +7,7 @@ Please feel free to open a Pull request or Issue at https://github.com/Jx32/php-
 ## 0. Minimum requirements
 
  1. PHP version 8+
+ 2. PDO extension enabled, see https://www.php.net/manual/en/pdo.installation.php
 
 ## 1. Quick start
 ### 1.1 Environment setup
